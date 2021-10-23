@@ -5,18 +5,26 @@
 #include "anomaly_detection_util.h"
 #include <cmath>
 
-// returns the variance of X and Y
-float var(float* x, int size){
-    if (nullptr == x || size <= 0){
-        return 0;
-    }
-    float sumOfPwrx = 0;
+float calcMU(float *x, int size){
     float mu = 0;
     for (int i = 0; i < size; ++i) {
         mu += x[i];
-        sumOfPwrx += std:: powf(x[i], 2.0);
     }
-    float var = (sumOfPwrx / size) - std:: powf(mu, 2.0);
+    return (mu / size);
+}
+
+// returns the variance of X and Y
+float var(float* x, int size){
+    if (nullptr == x || size <= 0){
+        ////add if size of x != size
+        return 0;
+    }
+    float sum = 0;
+    float mu = calcMU(x, size);
+    for (int i = 0; i < size; ++i) {
+        sum += std:: powf((x[i] - mu), 2.0);
+    }
+    float var = (sum / size);
     return var;
 }
 
@@ -45,9 +53,9 @@ return 0.0;
 
 
 int main(){
-    float x[] = {2.0, 3.0, 4.0, 5.0};
-    int size = 4;
-    float j = var(x, 4);
+    float x[] = {1.0 ,2.0, 3.0, 4.0, 5.0, 6.0};
+    int size = 6;
+    float j = var(x, size);
     std:: cout << j;
     return 0;
 }
