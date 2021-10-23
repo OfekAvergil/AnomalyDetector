@@ -13,6 +13,14 @@ float average(float *x, int size){
     return (mu / size);
 }
 
+float averageDuplicate(float *x, float *y, int size){
+    float mu = 0;
+    for (int i = 0; i < size; ++i) {
+        mu = mu + (x[i] * y[i]);
+    }
+    return (mu / size);
+}
+
 // returns the variance of X and Y
 float var(float* x, int size){
     if (nullptr == x || size <= 0){
@@ -29,12 +37,25 @@ float var(float* x, int size){
 }
 
 // returns the covariance of X and Y
-float cov(float* x, float* y, int size){
-return 0.0;
+// 𝑐𝑜𝑣(𝑋, 𝑌) = 𝐸(𝑋𝑌) − 𝐸(𝑋)𝐸(𝑌) = 𝐸((𝑋 − 𝐸(𝑋))(𝑌 − 𝐸(𝑌))
+float cov(float* x, float* y, int size) {
+    float xy[size];
+    for (int i = 0; i < size; ++i) {
+        xy[i] = x[i] * y[i];
+    }
+    float avergXY = averageDuplicate(x, y, size);
+    float avergX = average(x, size);
+    float avergY = average(y, size);
+    float covariance = avergXY - (avergX * avergY);
+    return covariance;
 }
+
 // returns the Pearson correlation coefficient of X and Y
 float pearson(float* x, float* y, int size){
-return 0.0;
+    float sqrtVarX = sqrt(var(x, size));
+    float sqrtVarY = sqrt(var(y, size));
+    float covXY = cov(x, y, size);
+return (covXY / (sqrtVarX * sqrtVarY));
 }
 
 //
