@@ -5,7 +5,7 @@
 #include "anomaly_detection_util.h"
 #include <cmath>
 
-float calcMU(float *x, int size){
+float average(float *x, int size){
     float mu = 0;
     for (int i = 0; i < size; ++i) {
         mu += x[i];
@@ -20,7 +20,7 @@ float var(float* x, int size){
         return 0;
     }
     float sum = 0;
-    float mu = calcMU(x, size);
+    float mu = average(x, size);
     for (int i = 0; i < size; ++i) {
         sum += std:: powf((x[i] - mu), 2.0);
     }
