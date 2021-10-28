@@ -30,7 +30,7 @@ float var(float* x, int size){
     float sum = 0;
     float mu = average(x, size);
     for (int i = 0; i < size; ++i) {
-        sum += std:: powf((x[i] - mu), 2.0);
+        sum += powf((x[i] - mu), 2.0);
     }
     float var = (sum / size);
     return var;
@@ -58,27 +58,39 @@ float pearson(float* x, float* y, int size){
 return (covXY / (sqrtVarX * sqrtVarY));
 }
 
-//
-//// performs a linear regression and return s the line equation
-//Line linear_reg(Point** points, int size){
-//
-//}
-//// returns the deviation between point p and the line equation of the points
-//float dev(Point p,Point** points, int size){
-//
-//}
-//// returns the deviation between point p and the line
-//float dev(Point p,Line l){
-//
-//}
 
-
-int main(){
-    float x[] = {1.0 ,2.0, 3.0, 4.0, 5.0, 6.0};
-    int size = 6;
-    float j = var(x, size);
-    std:: cout << j;
-    return 0;
+// performs a linear regression and return s the line equation
+Line linear_reg(Point** points, int size){
+    float a = 0 , b= 0 ;
+    float arrX[size];
+    float arrY[size];
+    int i;
+    for (i = 0; i < size; i++){
+        arrX[i] = points[i]->x;
+        arrY[i] = points[i]->y;
+    }
+    a = cov(arrX, arrY, size) / var(arrX, size);
+    float avergX = average(arrX, size);
+    float avergY = average(arrY, size);
+    b = avergY - a * avergX;
+    Line l1(a, b);
+    return l1;
 }
+
+// returns the deviation between point p and the line equation of the points
+float dev(Point p,Point** points, int size){
+    Line l = linear_reg(points, size);
+    return dev(p, l);
+}
+// returns the deviation between point p and the line
+float dev(Point p,Line l){
+    float y = p.y;
+    float fx = l.a * p.x + l.b;
+    if(fx > y){
+        return fx-y;
+    }
+    return y - fx;
+}
+
 
 
