@@ -30,7 +30,7 @@ float var(float* x, int size){
     float sum = 0;
     float mu = average(x, size);
     for (int i = 0; i < size; ++i) {
-        sum += powf((x[i] - mu), 2.0);
+        sum += pow((x[i] - mu), 2.0);
     }
     float var = (sum / size);
     return var;
