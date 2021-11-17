@@ -92,6 +92,12 @@
 		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.cpp">
+			<Option target="AnomalyDetector"/>
+		</Unit>
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.h">
+			<Option target="AnomalyDetector"/>
+		</Unit>
 		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
