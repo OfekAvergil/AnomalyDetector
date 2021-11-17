@@ -54,6 +54,8 @@ public:
 
     const vector<string> getFeaturesNames() const;
 
+    float returnTime(int i);
+
 };
 
 
