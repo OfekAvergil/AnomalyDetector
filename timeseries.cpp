@@ -24,3 +24,7 @@ float TimeSeries::returnTime(int i) {
 
 }
 
+vector<float> TimeSeries::getData(string feature) const {
+    return vector<float>();
+}
+

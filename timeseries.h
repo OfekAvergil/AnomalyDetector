@@ -49,12 +49,14 @@ public:
                 data[element].push_back(stof(token));
             }
         }
-        file.close();
+        file.close();3
     }
 
     const vector<string> getFeaturesNames() const;
 
     float returnTime(int i);
+
+    vector<float> getData(string feature) const;
 
 };
 
