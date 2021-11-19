@@ -1,1 +1,1 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o  -o AnomalyDetector 
+/usr/bin/c++ -g CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o -o AnomalyDetector 

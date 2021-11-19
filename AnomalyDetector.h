@@ -5,11 +5,6 @@
 #ifndef ANOMALYDETECTOR_ANOMALYDETECTOR_H
 #define ANOMALYDETECTOR_ANOMALYDETECTOR_H
 
-
-class TimeSeries{
-    std::map<string, vector> data;
-        data.['size'] = 1
-};
 class AnomalyReport{
 public:
     const string description;

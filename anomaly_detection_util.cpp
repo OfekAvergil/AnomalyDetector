@@ -1,5 +1,5 @@
 //
-// Created by Hod Amar on 23/10/2021.
+// Hod Amar and Ofek Avergil
 //
 #include <iostream>
 #include "anomaly_detection_util.h"

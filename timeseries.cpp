@@ -69,7 +69,7 @@ const vector<string> TimeSeries::getFeaturesNames() const {
     return features;
 }
 
-float TimeSeries::returnTime(int i) {
+float TimeSeries::returnTime(int i) const {
     if (i <= vecLen){
         return time[i];
     }
