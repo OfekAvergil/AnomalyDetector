@@ -10,6 +10,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <regex>
 
 
 using namespace std;
@@ -52,10 +53,15 @@ public:
         file.close();
     }
 
+
+
     const vector<string> getFeaturesNames() const;
 
     float returnTime(int i);
 
+    vector<float> getData(string s) const;
+
+    map<string, vector<float>> getMap() const;
 };
 
 
