@@ -49,17 +49,6 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
 
 }
 
-//finds the linear reg Line of two feature's data
-Line SimpleAnomalyDetector::findLinReg(vector<float> data1, vector<float> data2, int size) {
-    int i;
-    //create a point array
-    Point* array[size];
-    for(i = 0; i < size; i++) {
-        array[i] = new Point(data1.at(i), data2.at(i));
-    }
-    return  linear_reg(array, size);
-}
-
 //auto-generated constuctor stub
 SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
@@ -68,8 +57,29 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
 
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
+    int i, size=0;
+    float temp = 0 , maxDev = 0;
     fillCf(ts);
-    
+    for(correlatedFeatures& couple : cf) {
+        vector<float> data1 = ts.getData(couple.feature1);
+        vector<float> data2 = ts.getData(couple.feature2);
+        size = (int)data1.size();
+        //create a point array
+        Point* array[size];
+        for(i = 0; i < size; i++) {
+            array[i] = new Point(data1.at(i), data2.at(i));
+        }
+        couple.lin_reg = linear_reg(array, size);
+        for(Point* p :array) {
+            temp = dev(*p, couple.lin_reg);
+            if (abs(temp) > abs(maxDev)){
+                maxDev = temp;
+            }
+        }
+        //double the distance
+        maxDev = maxDev * 2;
+        couple.threshold = abs(maxDev);
+    }
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {}
@@ -79,4 +89,5 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {}
 vector<correlatedFeatures> SimpleAnomalyDetector::getNormalModel() {
     return vector<correlatedFeatures>();
 }
+
 
