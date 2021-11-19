@@ -21,7 +21,6 @@ struct correlatedFeatures{
 class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
     vector<correlatedFeatures> cf;
     void fillCf(const TimeSeries& ts);
-    Line findLinReg (vector<float> data1, vector<float> data2, int size);
 
     public:
     SimpleAnomalyDetector();

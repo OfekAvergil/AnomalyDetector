@@ -41,7 +41,6 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             couple.feature1 = feature;
             couple.feature2 = corrFeature;
             couple.corrlation = maxCorr;
-            couple.lin_reg = findLinReg(featureData, otherData, size) ;
             //add to the correlative couples vector.
             cf.push_back(couple);
         }
@@ -49,12 +48,12 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
 
 }
 
-//auto-generated constuctor stub
+//auto-generated constructor
 SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
-//auto-generated destructor stub
-SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
-
+//auto-generated destructor
+SimpleAnomalyDetector::~SimpleAnomalyDetector() {
+}
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
     int i, size=0;
@@ -82,12 +81,37 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
     }
 }
 
-vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {}
+vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
+    int i,time = 0, size = 0;
+    float dist = 0;
+    vector<AnomalyReport> report;
+    for(correlatedFeatures& couple : cf) {
+        vector<float> data1 = ts.getData(couple.feature1);
+        vector<float> data2 = ts.getData(couple.feature2);
+        size = (int)data1.size();
+        //create points array
+        Point* array[size];
+        for(i = 0; i < size; i++) {
+            array[i] = new Point(data1.at(i), data2.at(i));
+        }
+        for(Point* p :array) {
+            dist = dev(*p, couple.lin_reg);
+            if (abs(dist) > abs(couple.threshold)){
+                string desc = (couple.feature1 + "-" + couple.feature2);
+                long timeStamp = ts.returnTime(i);
+                AnomalyReport* r = new AnomalyReport(desc ,timeStamp);
+                report.push_back(*r);
+            }
+            time ++;
+        }
+        return report;
+    }
+}
 
 
 
 vector<correlatedFeatures> SimpleAnomalyDetector::getNormalModel() {
-    return vector<correlatedFeatures>();
+    return cf;
 }
 
 
