@@ -98,7 +98,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
             dist = dev(*p, couple.lin_reg);
             if (abs(dist) > abs(couple.threshold)){
                 string desc = (couple.feature1 + "-" + couple.feature2);
-                long timeStamp = ts.returnTime(i);
+                long timeStamp = (long) ts.returnTime(i);
                 AnomalyReport* r = new AnomalyReport(desc ,timeStamp);
                 report.push_back(*r);
             }

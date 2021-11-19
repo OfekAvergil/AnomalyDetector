@@ -26,7 +26,7 @@ public:
 
     const vector<string> getFeaturesNames() const;
 
-    float returnTime(int i);
+    float returnTime(int i) const;
 
     vector<float> getData(string s) const;
 
