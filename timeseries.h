@@ -10,6 +10,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <regex>
 
 
 using namespace std;
@@ -49,15 +50,18 @@ public:
                 data[element].push_back(stof(token));
             }
         }
-        file.close();3
+        file.close();
     }
+
+
 
     const vector<string> getFeaturesNames() const;
 
     float returnTime(int i);
 
-    vector<float> getData(string feature) const;
+    vector<float> getData(string s) const;
 
+    map<string, vector<float>> getMap() const;
 };
 
 
