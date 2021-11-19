@@ -4,33 +4,75 @@
 
 #include "timeseries.h"
 
-const vector<string> TimeSeries::getFeaturesNames() const {
-    return features;
+///** constructor
+///** initialize map of strings (keys) and vectors.
+TimeSeries::TimeSeries(const char* CSVfileName) {
+    string line, token;
+    map<string, vector<float>> data;
+    ifstream file;
+    stringstream ss;
+
+    /// open file and check it
+    file.open(CSVfileName);
+    if (!file.is_open()) {
+        throw std::runtime_error("Couldn't open file\n");
+    }
+
+    /// getting features name
+    if (file.good()) {
+        getline(file, line);
+        ss.str(line);
+        while (getline(ss, line, ',')) {
+            features.push_back(line);
+        }
+    }
+
+    /// making map of lines
+    while (getline(file, line)) {
+        std::stringstream ss1(line);
+        /// making the vector and initial keymap
+        for (auto element : features) {
+            getline(ss1, token, ',');
+            data[element].push_back(stof(token));
+        }
+    }
+    vecLen = data[features[0]].size();
+    time = makeTimeVec();
+    file.close();
 }
 
-float TimeSeries::returnTime(int i) {
-
+///** initialize time vector
+vector<float> TimeSeries::makeTimeVec(){
+    vector<float> v;
     smatch m1;
     regex r("[A-Za-z]*[Tt][Ii][Mm][Ee].*");
-    float temp;
     int flag = 0;
-
     /// searching for "TIME" in features vector
     for (std:: string element : features){
         std:: regex_match(element,m1,r);
         if (!m1.empty()){
             flag = 1;
-             temp = data[element][i];
-             break;
+            v = data[element];
+            break;
         }
     }
-
-    if (flag) {
-        return temp;
+    /// if doesnt exist - making with the same interval.
+    if (!flag) {
+        for (int i = 0; i < vecLen; ++i) {
+            v.push_back(i * 0.1);
+        }
     }
+    return v;
+}
 
-    /// if doesnt exist - def.
-    return 1.0;
+const vector<string> TimeSeries::getFeaturesNames() const {
+    return features;
+}
+
+float TimeSeries::returnTime(int i) {
+    if (i <= vecLen){
+        return time[i];
+    }
 }
 
 
