@@ -8,7 +8,6 @@
 ///** initialize map of strings (keys) and vectors.
 TimeSeries::TimeSeries(const char* CSVfileName) {
     string line, token;
-    map<string, vector<float>> data;
     ifstream file;
     stringstream ss;
 
@@ -40,6 +39,7 @@ TimeSeries::TimeSeries(const char* CSVfileName) {
     time = makeTimeVec();
     file.close();
 }
+
 
 ///** initialize time vector
 vector<float> TimeSeries::makeTimeVec(){
