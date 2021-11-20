@@ -93,7 +93,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
         for(i = 0; i < size; i++) {
             array[i] = new Point(data1.at(i), data2.at(i));
         }
-        maxDist = 2 * abs(couple.threshold);
+        maxDist = 1.1 * abs(couple.threshold);
         for(Point* p :array) {
             dist = dev(*p, couple.lin_reg);
             if (abs(dist) > maxDist){
