@@ -1,5 +1,5 @@
 //
-// Created by Hod Amar on 17/11/2021.
+// Hod Amar and Ofek Avergil
 //
 
 #include "timeseries.h"
@@ -36,45 +36,13 @@ TimeSeries::TimeSeries(const char* CSVfileName) {
         }
     }
     vecLen = data[features[0]].size();
-    time = makeTimeVec();
+    //time = makeTimeVec();
     file.close();
-}
-
-
-///** initialize time vector
-vector<float> TimeSeries::makeTimeVec(){
-    vector<float> v;
-    smatch m1;
-    regex r("[A-Za-z]*[Tt][Ii][Mm][Ee].*");
-    int flag = 0;
-    /// searching for "TIME" in features vector
-    for (std:: string element : features){
-        std:: regex_match(element,m1,r);
-        if (!m1.empty()){
-            flag = 1;
-            v = data[element];
-            break;
-        }
-    }
-    /// if doesnt exist - making with the same interval.
-    if (!flag) {
-        for (int i = 0; i < vecLen; ++i) {
-            v.push_back(i * 0.1);
-        }
-    }
-    return v;
 }
 
 const vector<string> TimeSeries::getFeaturesNames() const {
     return features;
 }
-
-float TimeSeries::returnTime(int i) const {
-    if (i <= vecLen){
-        return time[i];
-    }
-}
-
 
 vector<float> TimeSeries::getData(string s) const{
     /// we assome that the string is valid
@@ -86,4 +54,34 @@ vector<float> TimeSeries::getData(string s) const{
 map<string, vector<float>> TimeSeries::getMap() const {
     return this->data;
 }
+
+///** initialize time vector
+//vector<float> TimeSeries::makeTimeVec(){
+//    vector<float> v;
+//    smatch m1;
+//    regex r("[A-Za-z]*[Tt][Ii][Mm][Ee].*");
+//    int flag = 0;
+//    /// searching for "TIME" in features vector
+//    for (std:: string element : features){
+//        std:: regex_match(element,m1,r);
+//        if (!m1.empty()){
+//            flag = 1;
+//            v = data[element];
+//            break;
+//        }
+//    }
+//    /// if doesnt exist - making with the same interval.
+//    if (!flag) {
+//        for (int i = 0; i < vecLen; ++i) {
+//            v.push_back(i * 0.1);
+//        }
+//    }
+//    return v;
+//}
+
+//float TimeSeries::returnTime(int i) const {
+//    if (i <= vecLen){
+//        return time[i];
+//    }
+//}
 

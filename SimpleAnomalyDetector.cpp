@@ -1,5 +1,5 @@
 //
-// Created by ofek on 18/11/2021.
+// Hod Amar and Ofek Avergil
 //
 
 #include "SimpleAnomalyDetector.h"
@@ -10,22 +10,25 @@ using namespace std;
 const float MIN_THRESHOLD = 0.5;
 //find correlative couples.
 void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
-    int size = 0;
+    int size = 0, i, j;
     float maxCorr = 0, temp = 0, *data1, *data2;
-    string corrFeature;
+    string corrFeature, other, feature;
     vector<float> featureData, otherData;
     //get the names of the features
     vector<string> features = ts.getFeaturesNames();
+    int featuresNum = (int)features.size();
     //for every feature in the list look for correlative feature.
-    for (const string& feature : features) {
+    for(i=0; i<featuresNum; i++) {
+        maxCorr = 0;
+        feature = features.at(i);
         featureData = ts.getData(feature);
-        size = featureData.size();
         data1 = &featureData[0];
-        //delete the feature form my data to avoid repeat.
-        features.erase(std::remove(features.begin(),features.end(),feature), features.end());
+        size = (int)featureData.size();
         //calculate with all the other features
-        for (const string& other : features) {
-            data2 = &ts.getData(other)[0];
+        for (j = i + 1; j < featuresNum; j++) {
+            other = features.at(j);
+            otherData = ts.getData(other);
+            data2 = &otherData[0];
             //find the correlation
             temp = pearson(data1 ,data2 ,size);
             //if correlation is bigger in absolute mark this feature as the correlated one.
@@ -45,15 +48,13 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             cf.push_back(couple);
         }
     }
-
 }
 
 //auto-generated constructor
 SimpleAnomalyDetector::SimpleAnomalyDetector() {}
 
 //auto-generated destructor
-SimpleAnomalyDetector::~SimpleAnomalyDetector() {
-}
+SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
     int i, size=0;
@@ -75,15 +76,13 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
                 maxDev = temp;
             }
         }
-        //double the distance
-        maxDev = maxDev * 2;
         couple.threshold = abs(maxDev);
     }
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
-    int i,time = 0, size = 0;
-    float dist = 0;
+    int i,time = 1, size = 0;
+    float dist = 0, maxDist =0;
     vector<AnomalyReport> report;
     for(correlatedFeatures& couple : cf) {
         vector<float> data1 = ts.getData(couple.feature1);
@@ -94,18 +93,19 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
         for(i = 0; i < size; i++) {
             array[i] = new Point(data1.at(i), data2.at(i));
         }
+        maxDist = 2 * abs(couple.threshold);
         for(Point* p :array) {
             dist = dev(*p, couple.lin_reg);
-            if (abs(dist) > abs(couple.threshold)){
+            if (abs(dist) > maxDist){
                 string desc = (couple.feature1 + "-" + couple.feature2);
-                long timeStamp = (long) ts.returnTime(i);
-                AnomalyReport* r = new AnomalyReport(desc ,timeStamp);
+                //long timeStamp = (long) ts.returnTime(i);
+                AnomalyReport* r = new AnomalyReport(desc ,time);
                 report.push_back(*r);
             }
             time ++;
         }
-        return report;
     }
+    return report;
 }
 
 
