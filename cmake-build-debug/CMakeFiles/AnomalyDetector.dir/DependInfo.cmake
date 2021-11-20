@@ -1,25 +1,18 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ofek/Documents/SimpleAnomalyDetector.cpp" "/home/ofek/Documents/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o"
-  "/home/ofek/Documents/anomaly_detection_util.cpp" "/home/ofek/Documents/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o"
-  "/home/ofek/Documents/timeseries.cpp" "/home/ofek/Documents/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o"
+  "/Users/hodamar/CLionProjects/AnomalyDetector/MainTrain.cpp" "/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o"
+  "/Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.cpp" "/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o"
+  "/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.cpp" "/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o"
+  "/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.cpp" "/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  )
-
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
   )
 
 # Targets to which this target links.

@@ -8,102 +8,103 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/ofek/Documents/cmake-build-debug"/>
+				<Option working_dir="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/ofek/Documents/cmake-build-debug"/>
+				<Option working_dir="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/ofek/Documents/cmake-build-debug"/>
+				<Option working_dir="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AnomalyDetector">
-				<Option output="/home/ofek/Documents/cmake-build-debug/AnomalyDetector" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/ofek/Documents/cmake-build-debug"/>
+				<Option output="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/AnomalyDetector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 AnomalyDetector"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 AnomalyDetector"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AnomalyDetector/fast">
-				<Option output="/home/ofek/Documents/cmake-build-debug/AnomalyDetector" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/ofek/Documents/cmake-build-debug"/>
+				<Option output="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/AnomalyDetector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 AnomalyDetector/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/ofek/Documents/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 AnomalyDetector/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/hodamar/CLionProjects/AnomalyDetector/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/ofek/Documents/AnomalyDetector.h">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/AnomalyDetector.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/SimpleAnomalyDetector.cpp">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/MainTrain.cpp">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/SimpleAnomalyDetector.h">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.cpp">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/anomaly_detection_util.cpp">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/anomaly_detection_util.h">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.cpp">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/timeseries.cpp">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/timeseries.h">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.cpp">
 			<Option target="AnomalyDetector"/>
 		</Unit>
-		<Unit filename="/home/ofek/Documents/CMakeLists.txt">
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.h">
+			<Option target="AnomalyDetector"/>
+		</Unit>
+		<Unit filename="/Users/hodamar/CLionProjects/AnomalyDetector/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
