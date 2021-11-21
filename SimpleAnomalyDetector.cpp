@@ -3,11 +3,13 @@
 //
 
 #include "SimpleAnomalyDetector.h"
+#include "anomaly_detection_util.h"
+
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-const float MIN_THRESHOLD = 0.83;
+const float MIN_THRESHOLD = 0.5;
 //find correlative couples.
 void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
     int size = 0, i, j;
@@ -38,7 +40,7 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             }
         }
         //if we found correlative feature, create new correlatedFeatures
-        if(maxCorr >= MIN_THRESHOLD) {
+        if(abs(maxCorr) >= MIN_THRESHOLD) {
             correlatedFeatures couple;
             //fill data
             couple.feature1 = feature;
