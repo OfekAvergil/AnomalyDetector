@@ -40,7 +40,7 @@ void generateTestCSV(float a1,float b1, float a2, float b2, int anomaly){
         if(i!=anomaly)
             out<<a<<","<<b<<","<<ac.f(a)-0.02+(rand()%40)/100.0f<<","<<bd.f(b)-0.02+(rand()%40)/100.0f<<endl;
         else
-            out<<a<<","<<b<<","<<ac.f(a)+1<<","<<bd.f(b)-0.02+(rand()%40)/100.0f<<endl;
+            out<<a<<","<<b<<","<<ac.f(a)+1<<","<<bd.f(b)+20.0f<<endl;
     }
     out.close();
 }
@@ -98,7 +98,7 @@ int main(){
     bool anomlyDetected=false;
     int falseAlarms=0;
     for_each(r.begin(),r.end(),[&anomaly,&anomlyDetected,&falseAlarms](AnomalyReport ar){
-        if(ar.description=="A-C" && ar.timeStep == anomaly)
+        if((ar.description=="A-C"|| ar.description =="B-D") && ar.timeStep == anomaly)
             anomlyDetected=true;
         else
             falseAlarms++;

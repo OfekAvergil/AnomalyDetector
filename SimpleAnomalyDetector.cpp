@@ -83,10 +83,11 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
-    int i,time = 1, size = 0;
+    int i,time, size = 0;
     float dist = 0, maxDist =0;
     vector<AnomalyReport> report;
     for(correlatedFeatures& couple : cf) {
+        time = 1;
         vector<float> data1 = ts.getData(couple.feature1);
         vector<float> data2 = ts.getData(couple.feature2);
         size = (int)data1.size();
