@@ -10,24 +10,6 @@
 timeseries.h
 /Users/hodamar/CLionProjects/AnomalyDetector/timeseries.h
 
-/Users/hodamar/CLionProjects/AnomalyDetector/MainTrain.cpp
-iostream
--
-vector
--
-AnomalyDetector.h
-/Users/hodamar/CLionProjects/AnomalyDetector/AnomalyDetector.h
-SimpleAnomalyDetector.h
-/Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.h
-fstream
--
-stdlib.h
--
-time.h
--
-math.h
--
-
 /Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.cpp
 SimpleAnomalyDetector.h
 /Users/hodamar/CLionProjects/AnomalyDetector/SimpleAnomalyDetector.h
@@ -44,19 +26,7 @@ anomaly_detection_util.h
 AnomalyDetector.h
 /Users/hodamar/CLionProjects/AnomalyDetector/AnomalyDetector.h
 
-/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.cpp
-iostream
--
-anomaly_detection_util.h
 /Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h
-cmath
--
-
-/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h
-
-/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.cpp
-timeseries.h
-/Users/hodamar/CLionProjects/AnomalyDetector/timeseries.h
 
 /Users/hodamar/CLionProjects/AnomalyDetector/timeseries.h
 string

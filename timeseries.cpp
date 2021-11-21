@@ -73,7 +73,7 @@ map<string, vector<float>> TimeSeries::getMap() const {
 //    /// if doesnt exist - making with the same interval.
 //    if (!flag) {
 //        for (int i = 0; i < vecLen; ++i) {
-//            v.push_back(i * 0.1);
+//            v.push_back(i * 1);
 //        }
 //    }
 //    return v;

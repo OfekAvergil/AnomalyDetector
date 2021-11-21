@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-const float MIN_THRESHOLD = 0.5;
+const float MIN_THRESHOLD = 0.83;
 //find correlative couples.
 void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
     int size = 0, i, j;
@@ -102,7 +102,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
                 AnomalyReport* r = new AnomalyReport(desc ,time);
                 report.push_back(*r);
             }
-            time ++;
+            time++;
         }
     }
     return report;
