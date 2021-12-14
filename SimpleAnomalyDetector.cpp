@@ -113,8 +113,3 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
 
 
 
-vector<correlatedFeatures> SimpleAnomalyDetector::getNormalModel() {
-    return cf;
-}
-
-

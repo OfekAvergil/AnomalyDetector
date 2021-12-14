@@ -7,6 +7,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "anomaly_detection_util.h"
+#include <math.h>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
 // --------------------------------------
 
 Circle findMinCircle(Point** points,size_t size);
-
+bool isInside(const Circle& c, const Point& p);
 // you can add here additional methods
 
 #endif /* MINCIRCLE_H_ */
