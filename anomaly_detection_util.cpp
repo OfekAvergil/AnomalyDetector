@@ -5,7 +5,7 @@
 #include "anomaly_detection_util.h"
 #include <cmath>
 
-float average(float *x, int size){
+float avg(float *x, int size){
     float mu = 0;
     for (int i = 0; i < size; ++i) {
         mu += x[i];
@@ -28,7 +28,7 @@ float var(float* x, int size){
         return 0;
     }
     float sum = 0;
-    float mu = average(x, size);
+    float mu = avg(x, size);
     for (int i = 0; i < size; ++i) {
         sum += pow((x[i] - mu), 2.0);
     }
@@ -44,8 +44,8 @@ float cov(float* x, float* y, int size) {
         xy[i] = x[i] * y[i];
     }
     float avergXY = averageDuplicate(x, y, size);
-    float avergX = average(x, size);
-    float avergY = average(y, size);
+    float avergX = avg(x, size);
+    float avergY = avg(y, size);
     float covariance = avergXY - (avergX * avergY);
     return covariance;
 }
@@ -70,8 +70,8 @@ Line linear_reg(Point** points, int size){
         arrY[i] = points[i]->y;
     }
     a = cov(arrX, arrY, size) / var(arrX, size);
-    float avergX = average(arrX, size);
-    float avergY = average(arrY, size);
+    float avergX = avg(arrX, size);
+    float avergY = avg(arrY, size);
     b = avergY - a * avergX;
     Line l1(a, b);
     return l1;

@@ -4,10 +4,12 @@
 
 #ifndef ANOMALYDETECTOR_ANOMALYDETECTOR_H
 #define ANOMALYDETECTOR_ANOMALYDETECTOR_H
-
+#include <string>
+#include <vector>
 #include "timeseries.h"
-
+#include "math.h"
 using namespace std;
+
 class AnomalyReport{
 public:
     const string description;
