@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hodamar/CLionProjects/AnomalyDetector/MainTrain-ex3.cpp
+iostream
+-
+vector
+-
+stdlib.h
+-
+time.h
+-
+math.h
+-
+minCircle.h
+/Users/hodamar/CLionProjects/AnomalyDetector/minCircle.h
+chrono
+-
+
+/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h
+
+/Users/hodamar/CLionProjects/AnomalyDetector/minCircle.cpp
+minCircle.h
+/Users/hodamar/CLionProjects/AnomalyDetector/minCircle.h
+
+/Users/hodamar/CLionProjects/AnomalyDetector/minCircle.h
+iostream
+-
+vector
+-
+stdlib.h
+-
+time.h
+-
+anomaly_detection_util.h
+/Users/hodamar/CLionProjects/AnomalyDetector/anomaly_detection_util.h
+math.h
+-
+
