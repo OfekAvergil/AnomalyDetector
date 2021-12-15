@@ -9,7 +9,7 @@
 #include <algorithm>
 using namespace std;
 
-const float MIN_THRESHOLD = 0.5;
+const float MIN_THRESHOLD = 0.9;
 
 /**
  * finds for each feature a correlated feature, and create a correlativeFeatures object of them.
@@ -44,7 +44,7 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             }
         }
         //if we found correlative feature, create new correlatedFeatures
-        if(abs(maxCorr) >= MIN_THRESHOLD) {
+        if(checkIfCorr(maxCorr)) {
             correlatedFeatures couple;
             //fill data
             couple.feature1 = feature;
@@ -54,6 +54,15 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             cf.push_back(couple);
         }
     }
+}
+
+/**
+ * checks if the correlation is over the minimum threshold
+ * @param corr - the check correlated
+ * @return - true if the correlation is big enough, false otherwise.
+ */
+bool SimpleAnomalyDetector::checkIfCorr(float corr) {
+    return (abs(corr) >= MIN_THRESHOLD);
 }
 
 //auto-generated constructor
@@ -78,7 +87,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         for(i = 0; i < size; i++) {
             array[i] = new Point(data1.at(i), data2.at(i));
         }
-        fillLinearCorr(&couple,array,size);
+        fillCorr(&couple,array,size);
     }
 }
 /**
@@ -87,7 +96,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
  * @param array  - array of pointer to points
  * @param size   - the size of the array;
  */
-void SimpleAnomalyDetector:: fillLinearCorr(correlatedFeatures* couple, Point** array, int size) {
+void SimpleAnomalyDetector:: fillCorr(correlatedFeatures* couple, Point** array, size_t size) {
     float temp = 0 , maxDev = 0;
     int i;
     couple->lin_reg = linear_reg(array, size);
@@ -120,7 +129,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
             array[i] = new Point(data1.at(i), data2.at(i));
         }
         for(Point* p :array) {
-            if(detectLinearCorr(couple,p)){
+            if(detectCorr(couple,p)){
                 string desc = (couple.feature1 + "-" + couple.feature2);
                 //long timeStamp = (long) ts.returnTime(i);
                 AnomalyReport* r = new AnomalyReport(desc ,time);
@@ -138,7 +147,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
  * @param p      - the checked point
  * @return True is there is an anomaly, false otherwise.
  */
-bool SimpleAnomalyDetector:: detectLinearCorr(correlatedFeatures couple, Point *p ) {
+bool SimpleAnomalyDetector:: detectCorr(correlatedFeatures couple, Point *p ) {
     float maxDist = 1.1 * abs(couple.threshold);
     float dist = dev(*p, couple.lin_reg);
     return (abs(dist) > maxDist);

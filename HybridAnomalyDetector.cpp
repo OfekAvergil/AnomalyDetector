@@ -1,6 +1,10 @@
-
+//
+// Hod Amar and Ofek Avergil
+//
 #include "HybridAnomalyDetector.h"
 #include "minCircle.h"
+
+const float MIN_THRESHOLD = 0.5;
 
 // Auto-generated constructor stub
 HybridAnomalyDetector::HybridAnomalyDetector() {
@@ -10,84 +14,33 @@ HybridAnomalyDetector::HybridAnomalyDetector() {
  HybridAnomalyDetector:: ~HybridAnomalyDetector() {
 }
 
+
 /**
- * get the training data and arrange it's correlated features.
- * @param ts - TimeSeries object with the data
+ * checks if the correlation is over the minimum threshold
+ * @param corr - the check correlated
+ * @return - true if the correlation is big enough, false otherwise.
  */
-void HybridAnomalyDetector::learnNormal(const TimeSeries &ts) {
-    int i;
-    size_t size=0;
-    this->SimpleAnomalyDetector::fillCf(ts);
-    for(correlatedFeatures& couple : cf) {
-        vector<float> data1 = ts.getData(couple.feature1);
-        vector<float> data2 = ts.getData(couple.feature2);
-        size = data1.size();
-        //create a point array
-        Point* array[size];
-        for(i = 0; i < size; i++) {
-            array[i] = new Point(data1.at(i), data2.at(i));
-        }
-        if(couple.corrlation >= 0.9) {
-            fillLinearCorr(&couple,array,data1.size());
-        } else{
-            fillCircCorr(&couple,array,size);
-        }
-    }
+bool HybridAnomalyDetector::checkIfCorr(float corr) {
+    return (abs(corr) >= MIN_THRESHOLD);
 }
 
-
 /**
- * fills the circ_Reg feild of the linear correlated features
+ * if the corr is linear finds lin_reg and threshold, if the corr is circular finds the reg_circ
  * @param couple - correlatedfeature object
  * @param array  - array of pointer to points
  * @param size   - the size of the array;
  */
-void HybridAnomalyDetector:: fillCircCorr(correlatedFeatures* couple, Point** array, size_t size) {
-    float temp = 0 , maxDev = 0;
-    int i;
-    couple->circ_reg = findMinCircle(array,size);
-}
-
-
-/**
- * gets the tested data and check each correlated features if there anomaly in their data
- * @param ts - the data
- * @return vector with all the reports of anomaly
- */
-vector<AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts) {
-    int i,time, size = 0;
-    float dist = 0, maxDist =0;
-    vector<AnomalyReport> report;
-    for(correlatedFeatures& couple : cf) {
-        time = 1;
-        vector<float> data1 = ts.getData(couple.feature1);
-        vector<float> data2 = ts.getData(couple.feature2);
-        size = (int)data1.size();
-        //create points array
-        Point* array[size];
-        for(i = 0; i < size; i++) {
-            array[i] = new Point(data1.at(i), data2.at(i));
-        }
-        for(Point* p :array) {
-            if(couple.corrlation >= 0.9 ) {
-                if( detectLinearCorr(couple,p)) {
-                    string desc = (couple.feature1 + "-" + couple.feature2);
-                    //long timeStamp = (long) ts.returnTime(i);
-                    AnomalyReport* r = new AnomalyReport(desc ,time);
-                    report.push_back(*r);
-                }
-            }else {
-                if(detectCircularCorr(couple,p)) {
-                    string desc = (couple.feature1 + "-" + couple.feature2);
-                    //long timeStamp = (long) ts.returnTime(i);
-                    AnomalyReport* r = new AnomalyReport(desc ,time);
-                    report.push_back(*r);
-                }
-            }
-            time++;
-        }
+void HybridAnomalyDetector:: fillCorr(correlatedFeatures* couple, Point** array, size_t size) {
+    // if the corr is linear, move to the simple detector fill func.
+    if (couple->corrlation >= 0.9) {
+        this->SimpleAnomalyDetector::fillCorr(couple,array,size);
+    } else{
+        //if the corr is circular, find the circ reg
+        float temp = 0 , maxDev = 0;
+        int i;
+        couple->circ_reg = findMinCircle(array,size);
+        couple->isCirc = true;
     }
-    return report;
 }
 
 /**
@@ -96,8 +49,12 @@ vector<AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts) {
  * @param p      - the checked point
  * @return True is there is an anomaly, false otherwise.
  */
-bool HybridAnomalyDetector:: detectCircularCorr(correlatedFeatures couple, Point *p ) {
-    Circle bigger = couple.circ_reg;
-    bigger.radius = bigger.radius * 1.1;
-    return (!isInside(bigger,*p));
+bool HybridAnomalyDetector:: detectCorr(correlatedFeatures couple, Point *p ) {
+    if (couple.isCirc) {
+        Circle bigger = couple.circ_reg;
+        bigger.radius = bigger.radius * 1.1;
+        return (!isInside(bigger, *p));
+    } else {
+        return this->SimpleAnomalyDetector::detectCorr(couple, p);
+    }
 }

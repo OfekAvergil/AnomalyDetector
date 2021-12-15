@@ -1,3 +1,6 @@
+//
+// Hod Amar and Ofek Avergil
+//
 #include "minCircle.h"
 
 
