@@ -54,7 +54,6 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
             cf.push_back(couple);
         }
     }
-    couple->threshold = abs(maxDev);
 }
 
 /**
