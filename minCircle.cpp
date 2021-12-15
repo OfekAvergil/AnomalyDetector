@@ -1,3 +1,6 @@
+//
+// Hod Amar and Ofek Avergil
+//
 #include "minCircle.h"
 /// Return the distance between 2 points.
 float dist(const Point& a, const Point& b) {

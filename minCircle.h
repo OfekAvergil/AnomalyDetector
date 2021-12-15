@@ -1,4 +1,6 @@
-
+//
+// Hod Amar and Ofek Avergil
+//
 #ifndef MINCIRCLE_H_
 #define MINCIRCLE_H_
 
