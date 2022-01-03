@@ -82,7 +82,7 @@ public:
             test.push_back(line);
             line = dio->read();
         }
-        TimeSeries* ts2 = new TimeSeries(trainName);
+        TimeSeries* ts2 = new TimeSeries(testName);
         this->data->TestDate = ts2;
         makeFileFromVector(train, testName);
         dio->write("Upload complete.\n");
@@ -172,9 +172,55 @@ public:
 
 class AnalyzeCommand : public Command{
 public:
-    AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
-    virtual void execute(){};
-    virtual string getDes () {};
+    AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "5.upload anomalies and analyze results.\n";
+    }
+    void add(vector<Point>* v, string line){
+        vector<float> temp;
+        stringstream ss(line);
+        while (ss.good()) {
+            string substr;
+            getline(ss, substr, ',');
+            temp.push_back(stof(substr));
+        }
+        Point pnt(temp[0], temp[1]);
+        v->push_back(pnt);
+    }
+
+    int intervalSum(vector<Point>* points){
+        int temp = 0;
+        for (Point p : *points) {
+            temp += p.y - p.x;
+        }
+        return temp;
+    }
+
+
+
+    virtual void execute(){
+        vector<Point>* points = new vector<Point>();
+        string line;
+        int N, P, TP = 0, FN = 0;
+
+        int n = this->data->TestDate->lineSize();
+        //// reading the file into vector.
+        this->dio->write("Please upload your local anomalies file.\n");
+        line = this->dio->read();
+        while(line != "done"){
+            add(points, line);
+            line = this->dio->read();
+        }
+        dio->write("Upload complete.\n");
+        N = n - intervalSum(points);
+        P = points->size();
+
+        this->data->detector->
+
+    }
+
+    virtual string getDes () {
+        return this->description;
+    }
 
 };
 
@@ -182,11 +228,11 @@ class ExitCommand : public Command{
 public:
     ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
         this->description = "6.exit\n";
-    };
+    }
     virtual void execute(){};
     virtual string getDes () {
         return this->description;
-    };
+    }
 
 };
 

@@ -33,6 +33,8 @@ public:
     map<string, vector<float>> getMap() const;
 
     //vector<float> makeTimeVec();
+
+    int lineSize();
 };
 
 
