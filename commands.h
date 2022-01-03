@@ -23,20 +23,64 @@ public:
 	// you may add additional methods here
 };
 
-// you may add here helper classes
-
-
-// you may edit this class
-class Command{
-	DefaultIO* dio;
+class AnomalyDetectorData{
 public:
-	Command(DefaultIO* dio):dio(dio){}
+    TimeSeries* learnData;
+    TimeSeries* TestDate;
+    HybridAnomalyDetector* detector = new HybridAnomalyDetector();
+    AnomalyReport* report;
+    virtual ~AnomalyDetectorData(){};
+};
+
+class Command{
+protected:
+	DefaultIO* dio;
+    AnomalyDetectorData* data;
+    string description;
+public:
+	Command(DefaultIO* dio, AnomalyDetectorData* data):dio(dio), data(data){}
 	virtual void execute()=0;
 	virtual ~Command(){}
+    virtual string getDes () = 0;
 };
 
 // implement here your command classes
+class UploadCommand : public Command{
+public:
+    UploadCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
 
+};
+class SettingsCommand : public Command {
+    SettingsCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
 
+};
+class AnomalyDetectionCommand : public Command{
+    AnomalyDetectionCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
+
+};
+class ResultCommand : public Command{
+    ResultCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
+
+};
+class AnalyzeCommand : public Command{
+    AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
+
+};
+class ExitCommand : public Command{
+    ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    virtual void execute(){};
+    virtual string getDes () {};
+
+};
 
 #endif /* COMMANDS_H_ */
