@@ -1,4 +1,6 @@
-
+//
+// Hod Amar and Ofek Avergil
+//
 
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
@@ -22,13 +24,15 @@ public:
 
 	// you may add additional methods here
 };
-
+/**
+ * the class hold all the data relevant to the Anomaly Detector
+ */
 class AnomalyDetectorData{
 public:
     TimeSeries* learnData;
     TimeSeries* TestDate;
-    HybridAnomalyDetector* detector = new HybridAnomalyDetector();
-    AnomalyReport* report;
+    SimpleAnomalyDetector* detector = new HybridAnomalyDetector();
+    vector<AnomalyReport> reports;
     virtual ~AnomalyDetectorData(){};
 };
 
@@ -41,10 +45,12 @@ public:
 	Command(DefaultIO* dio, AnomalyDetectorData* data):dio(dio), data(data){}
 	virtual void execute()=0;
 	virtual ~Command(){}
-    virtual string getDes () = 0;
+    virtual string getDes () {
+        return this->description;
+    };
 };
 
-// implement here your command classes
+
 class UploadCommand : public Command{
 public:
     UploadCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
@@ -52,35 +58,83 @@ public:
     virtual string getDes () {};
 
 };
+
 class SettingsCommand : public Command {
-    SettingsCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
-    virtual void execute(){};
-    virtual string getDes () {};
+public:
+    SettingsCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "algorithm settings";
+    };
 
+    /**
+     * the function presents the current correlation and allows to replace it with a value in the range 0-1
+     */
+    virtual void execute(){
+        //print the current corr
+        this->dio->write("The current correlation threshold is " );
+        this->dio->write(this->data->detector->GetMinThresh() );
+        this->dio->write("\n" );
+        //get new corr
+        float corr;
+        this->dio->read(&corr);
+        //while the correlation entered isn't in the right range, show alert and start over.
+        if (corr < 0 || corr > 1) {
+            this->dio->write("please choose a value between 0 and 1" );
+            this->execute();
+        } else {
+            this->data->detector->ChangeMinThresh(corr);
+            return;
+        }
+    };
 };
+
 class AnomalyDetectionCommand : public Command{
-    AnomalyDetectionCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
-    virtual void execute(){};
-    virtual string getDes () {};
+public:
+    AnomalyDetectionCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "detect anomalies";
+    };
 
+    /**
+    * the function implements the anomaly detector's algorithm on the input data
+    */
+    virtual void execute(){
+        //learn
+        this->data->detector->learnNormal(*this->data->learnData);
+        //detect
+        this->data->reports = this->data->detector->detect(*this->data->TestDate);
+        this->dio->write("anomaly detection complete.\n" );
+    };
 };
+
 class ResultCommand : public Command{
-    ResultCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
-    virtual void execute(){};
-    virtual string getDes () {};
+public:
+    ResultCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "display results";
+    };
 
+    /**
+     * the function print the anomaly found in the data.
+     */
+    virtual void execute(){
+        for(AnomalyReport& r : this->data->reports) {
+            this->dio->write(r.timeStep);
+            this->dio->write("/t");
+            this->dio->write(r.description);
+            this->dio->write("/n");
+        }
+        this->dio->write("Done./n");
+    };
 };
+
 class AnalyzeCommand : public Command{
+public:
     AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
     virtual void execute(){};
-    virtual string getDes () {};
-
 };
+
 class ExitCommand : public Command{
+public:
     ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
     virtual void execute(){};
-    virtual string getDes () {};
-
 };
 
 #endif /* COMMANDS_H_ */

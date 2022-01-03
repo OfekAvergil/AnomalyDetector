@@ -1,5 +1,5 @@
 //
-// Created by Hod Amar on 16/11/2021.
+// Hod Amar and Ofek Avergil
 //
 
 #ifndef ANOMALYDETECTOR_ANOMALYDETECTOR_H

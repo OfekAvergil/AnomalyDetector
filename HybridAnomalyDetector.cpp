@@ -4,10 +4,9 @@
 #include "HybridAnomalyDetector.h"
 #include "minCircle.h"
 
-const float MIN_THRESHOLD = 0.5;
-
 // Auto-generated constructor stub
 HybridAnomalyDetector::HybridAnomalyDetector() {
+    this->minThreshold = 0.5;
 }
 
 /**
@@ -54,7 +53,7 @@ bool HybridAnomalyDetector:: detectCorr(correlatedFeatures couple, Point *p ) {
  * @return - true if the correlation is big enough, false otherwise.
  */
 bool HybridAnomalyDetector::checkIfCorr(float corr) {
-    return (abs(corr) >= MIN_THRESHOLD);
+    return (abs(corr) >= this->minThreshold);
 }
 
 

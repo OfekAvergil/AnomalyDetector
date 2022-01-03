@@ -85,6 +85,12 @@
 		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/AnomalyDetector.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
+		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/CLI.cpp">
+			<Option target="AnomalyDetector"/>
+		</Unit>
+		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/CLI.h">
+			<Option target="AnomalyDetector"/>
+		</Unit>
 		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/HybridAnomalyDetector.cpp">
 			<Option target="AnomalyDetector"/>
 		</Unit>
@@ -104,6 +110,9 @@
 			<Option target="AnomalyDetector"/>
 		</Unit>
 		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/anomaly_detection_util.h">
+			<Option target="AnomalyDetector"/>
+		</Unit>
+		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/commands.h">
 			<Option target="AnomalyDetector"/>
 		</Unit>
 		<Unit filename="/home/ofek/Desktop/Mivne/AnomalyDetector/minCircle.cpp">

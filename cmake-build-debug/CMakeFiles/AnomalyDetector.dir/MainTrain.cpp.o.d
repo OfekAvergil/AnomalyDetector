@@ -148,7 +148,14 @@ CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o: \
  /usr/include/c++/11.2.0/bits/locale_facets.tcc \
  /usr/include/c++/11.2.0/bits/basic_ios.tcc \
  /usr/include/c++/11.2.0/bits/ostream.tcc /usr/include/c++/11.2.0/istream \
- /usr/include/c++/11.2.0/bits/istream.tcc /usr/include/c++/11.2.0/vector \
+ /usr/include/c++/11.2.0/bits/istream.tcc /usr/include/c++/11.2.0/fstream \
+ /usr/include/c++/11.2.0/bits/codecvt.h \
+ /usr/include/c++/11.2.0/x86_64-unknown-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/11.2.0/x86_64-unknown-linux-gnu/bits/c++io.h \
+ /usr/include/c++/11.2.0/bits/fstream.tcc \
+ /home/ofek/Desktop/Mivne/AnomalyDetector/commands.h \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/c++/11.2.0/vector \
  /usr/include/c++/11.2.0/bits/stl_uninitialized.h \
  /usr/include/c++/11.2.0/bits/stl_vector.h \
  /usr/include/c++/11.2.0/bits/stl_bvector.h \
@@ -164,11 +171,7 @@ CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o: \
  /usr/include/c++/11.2.0/bits/uses_allocator.h \
  /usr/include/c++/11.2.0/bits/invoke.h \
  /usr/include/c++/11.2.0/bits/stl_multimap.h \
- /usr/include/c++/11.2.0/bits/erase_if.h /usr/include/c++/11.2.0/fstream \
- /usr/include/c++/11.2.0/bits/codecvt.h \
- /usr/include/c++/11.2.0/x86_64-unknown-linux-gnu/bits/basic_file.h \
- /usr/include/c++/11.2.0/x86_64-unknown-linux-gnu/bits/c++io.h \
- /usr/include/c++/11.2.0/bits/fstream.tcc /usr/include/c++/11.2.0/sstream \
+ /usr/include/c++/11.2.0/bits/erase_if.h /usr/include/c++/11.2.0/sstream \
  /usr/include/c++/11.2.0/bits/sstream.tcc /usr/include/c++/11.2.0/regex \
  /usr/include/c++/11.2.0/algorithm \
  /usr/include/c++/11.2.0/bits/stl_algo.h \
@@ -202,7 +205,6 @@ CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o: \
  /usr/include/c++/11.2.0/bits/stl_deque.h \
  /usr/include/c++/11.2.0/bits/deque.tcc \
  /usr/include/c++/11.2.0/bits/stl_stack.h /usr/include/c++/11.2.0/cstring \
- /usr/include/string.h /usr/include/strings.h \
  /usr/include/c++/11.2.0/bits/std_function.h \
  /usr/include/c++/11.2.0/bits/regex_constants.h \
  /usr/include/c++/11.2.0/bits/regex_error.h \
@@ -229,4 +231,5 @@ CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
  /home/ofek/Desktop/Mivne/AnomalyDetector/minCircle.h \
- /usr/include/c++/11.2.0/stdlib.h
+ /usr/include/c++/11.2.0/stdlib.h \
+ /home/ofek/Desktop/Mivne/AnomalyDetector/CLI.h

@@ -9,15 +9,13 @@
 #include <algorithm>
 using namespace std;
 
-const float MIN_THRESHOLD = 0.9;
-
 /**
  * finds for each feature a correlated feature, and create a correlativeFeatures object of them.
  * @param ts - TimeSeries object with the data
  */
 void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
-    int size = 0, i, j;
-    float maxCorr = 0, temp = 0, *data1, *data2;
+    int size, i, j;
+    float maxCorr, temp, *data1, *data2;
     string corrFeature, other, feature;
     vector<float> featureData, otherData;
     //get the names of the features
@@ -62,11 +60,24 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
  * @return - true if the correlation is big enough, false otherwise.
  */
 bool SimpleAnomalyDetector::checkIfCorr(float corr) {
-    return (abs(corr) >= MIN_THRESHOLD);
+    return (abs(corr) >= minThreshold);
 }
 
 //auto-generated constructor
-SimpleAnomalyDetector::SimpleAnomalyDetector() {}
+SimpleAnomalyDetector::SimpleAnomalyDetector() {
+    this->minThreshold = 0.9;
+}
+
+//constructor while given minimum threshold
+SimpleAnomalyDetector::SimpleAnomalyDetector(float thresh) {
+    this->minThreshold = thresh;
+}
+
+//setter func for minThreshold
+void SimpleAnomalyDetector::ChangeMinThresh(float thresh) {
+    this->minThreshold = thresh;
+}
+
 
 //auto-generated destructor
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
@@ -76,7 +87,7 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {}
  * @param ts - TimeSeries object with the data
  */
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
-    int i, size=0;
+    int i, size;
     fillCf(ts);
     for(correlatedFeatures& couple : cf) {
         vector<float> data1 = ts.getData(couple.feature1);
@@ -97,7 +108,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
  * @param size   - the size of the array;
  */
 void SimpleAnomalyDetector:: fillCorr(correlatedFeatures* couple, Point** array, size_t size) {
-    float temp = 0 , maxDev = 0;
+    float temp , maxDev = 0;
     int i;
     couple->lin_reg = linear_reg(array, size);
     for(i = 0; i < size; i++) {
@@ -115,8 +126,8 @@ void SimpleAnomalyDetector:: fillCorr(correlatedFeatures* couple, Point** array,
  * @return vector with all the reports of anomaly
  */
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
-    int i,time, size = 0;
-    float dist = 0, maxDist =0;
+    int i,time, size;
+    float dist, maxDist;
     vector<AnomalyReport> report;
     for(correlatedFeatures& couple : cf) {
         time = 1;
