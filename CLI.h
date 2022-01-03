@@ -1,4 +1,6 @@
-
+//
+// Hod Amar and Ofek Avergil
+//
 
 #ifndef CLI_H_
 #define CLI_H_
@@ -10,7 +12,8 @@ using namespace std;
 
 class CLI {
 	DefaultIO* dio;
-	// you can add data members
+    AnomalyDetectorData* data;
+    map<float,Command*> options;
 public:
 	CLI(DefaultIO* dio);
 	void start();
