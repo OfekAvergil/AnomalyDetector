@@ -1,16 +1,16 @@
-/app/extra/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ofek/Desktop/Mivne/AnomalyDetector
--- The C compiler identification is GNU 11.2.0
--- The CXX compiler identification is GNU 11.2.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/hodamar/CLionProjects/Anomaly_Detector
 -- Configuring done
--- Generating done
--- Build files have been written to: /home/ofek/Desktop/Mivne/AnomalyDetector/cmake-build-debug
+CMake Error at CMakeLists.txt:5 (add_executable):
+  Cannot find source file:
+
+    cmake-build-debug/mainhod.cpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:5 (add_executable):
+  No SOURCES given to target: AnomalyDetector
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

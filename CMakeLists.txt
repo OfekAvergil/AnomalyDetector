@@ -14,4 +14,4 @@ add_executable(AnomalyDetector
         HybridAnomalyDetector.cpp
         HybridAnomalyDetector.h
         minCircle.cpp
-        minCircle.h)
+        minCircle.h cmake-build-debug/mainhod.cpp mainhod.cpp)
