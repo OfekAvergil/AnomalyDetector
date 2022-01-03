@@ -1,6 +1,4 @@
-//
-// Hod Amar and Ofek Avergil
-//
+
 
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
@@ -53,9 +51,56 @@ public:
 
 class UploadCommand : public Command{
 public:
-    UploadCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
-    virtual void execute(){};
-    virtual string getDes () {};
+    UploadCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "1. upload a time series csv file";
+    };
+    virtual void execute(){
+        vector<string> train;
+        vector<string> test;
+        string line;
+        FILE f;
+        const char* trainName = "anomalyTrain.csv";
+        const char* testName = "anomalyTest.csv";
+        ///// do it with loop - it will be better
+
+        /// read train.
+        dio->write("Please upload your local train CSV file.\n");
+        line = dio->read();
+        while ("done" != line){
+            train.push_back(line);
+            line = dio->read();
+        }
+        makeFileFromVector(train, trainName);
+        TimeSeries* ts1 = new TimeSeries(trainName);
+        this->data->learnData = ts1;
+        dio->write("Upload complete.\n");
+
+        /// test train
+        dio->write("Please upload your local test CSV file.\n");
+        line = dio->read();
+        while ("done" != line){
+            test.push_back(line);
+            line = dio->read();
+        }
+        TimeSeries* ts2 = new TimeSeries(trainName);
+        this->data->TestDate = ts2;
+        makeFileFromVector(train, testName);
+        dio->write("Upload complete.\n");
+
+    };
+
+
+
+    virtual string getDes () {
+        return this->description;
+    };
+
+    void makeFileFromVector(vector<string> vec, const char* fileName){
+        ofstream file(fileName);
+        ofstream output_file(fileName);
+        ostream_iterator<std::string> output_iterator(output_file, "\n");
+        copy(vec.begin(), vec.end(), output_iterator);
+    }
 
 };
 
@@ -129,12 +174,20 @@ class AnalyzeCommand : public Command{
 public:
     AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
     virtual void execute(){};
+    virtual string getDes () {};
+
 };
 
 class ExitCommand : public Command{
 public:
-    ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
+    ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+        this->description = "6.exit\n";
+    };
     virtual void execute(){};
+    virtual string getDes () {
+        return this->description;
+    };
+
 };
 
 #endif /* COMMANDS_H_ */
