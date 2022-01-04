@@ -112,6 +112,7 @@ public:
         this->dio->write("The current correlation threshold is " );
         this->dio->write(this->data->detector->GetLinThresh() );
         this->dio->write("\n" );
+        this->dio->write("Type a new threshold\n");
         //get new corr
         float corr;
         this->dio->read(&corr);
@@ -172,7 +173,7 @@ class AnalyzeCommand : public Command{
     int FP;
 public:
     AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
-        this->description = "upload anomalies and analyze results\n";
+        this->description = "upload anomalies and analyze results";
         this->TP = 0;
         this->FP = 0;
     }
@@ -264,11 +265,6 @@ public:
         this->dio->write("\n");
 
     }
-
-    virtual string getDes () {
-        return this->description;
-    }
-
 };
 
 //command 6

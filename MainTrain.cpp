@@ -79,11 +79,11 @@ void check(string outputFile,string expectedOutputFile){
 
 //small test
 int main(){
-    STDtest std("/Users/hodamar/CLionProjects/AnomalyDetector_/input.txt","output.txt");
+    STDtest std("/home/ofek/Desktop/input.txt","/home/ofek/Desktop/output.txt");
     CLI cli(&std);
     cli.start();
     std.close();
-    check("output.txt","/Users/hodamar/CLionProjects/AnomalyDetector_/expectedOutput.txt");
+    check("/home/ofek/Desktop/output.txt","/home/ofek/Desktop/expectedOutput.txt");
     cout<<"done"<<endl;
     return 0;
 }
