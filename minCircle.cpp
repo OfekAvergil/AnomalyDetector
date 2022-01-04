@@ -13,6 +13,7 @@ float dist(const Point& a, const Point& b) {
  * Check if the given point inside of the given circle.
  */
 bool isInside(const Circle& c, const Point& p) {
+    float x = dist(c.center, p);
     return dist(c.center, p) <= c.radius;
 }
 

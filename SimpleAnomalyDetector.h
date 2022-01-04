@@ -24,7 +24,7 @@ struct correlatedFeatures{
 class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
 protected:
     void fillCf(const TimeSeries& ts);
-    float minThreshold;
+    float linThreshold;
     vector<correlatedFeatures> cf;
     virtual void fillCorr(correlatedFeatures* couple, Point **array,size_t size);
 
@@ -33,10 +33,10 @@ public:
     SimpleAnomalyDetector(float thresh);
     virtual ~SimpleAnomalyDetector();
 
-    float GetMinThresh(){
-        return  minThreshold;
+    float GetLinThresh(){
+        return  linThreshold;
     }
-    void ChangeMinThresh(float thresh);
+    void ChangeLinThresh(float thresh);
     vector<correlatedFeatures> getNormalModel(){
         return cf;
     }

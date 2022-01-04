@@ -13,7 +13,7 @@ using namespace std;
 class CLI {
 	DefaultIO* dio;
     AnomalyDetectorData* data;
-    map<float,Command*> options;
+    map<int,Command*> options;
 public:
 	CLI(DefaultIO* dio);
 	void start();

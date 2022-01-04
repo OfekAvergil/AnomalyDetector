@@ -6,7 +6,7 @@
 
 // Auto-generated constructor stub
 HybridAnomalyDetector::HybridAnomalyDetector() {
-    this->minThreshold = 0.5;
+    this->circThreshold = 0.5;
 }
 
 /**
@@ -17,7 +17,7 @@ HybridAnomalyDetector::HybridAnomalyDetector() {
  */
 void HybridAnomalyDetector:: fillCorr(correlatedFeatures* couple, Point** array, size_t size) {
     // if the corr is linear, move to the simple detector fill func.
-    if (couple->corrlation >= 0.9) {
+    if (couple->corrlation >= this->linThreshold) {
         this->SimpleAnomalyDetector::fillCorr(couple,array,size);
     } else{
         //if the corr is circular, find the circ reg
@@ -53,7 +53,7 @@ bool HybridAnomalyDetector:: detectCorr(correlatedFeatures couple, Point *p ) {
  * @return - true if the correlation is big enough, false otherwise.
  */
 bool HybridAnomalyDetector::checkIfCorr(float corr) {
-    return (abs(corr) >= this->minThreshold);
+    return (abs(corr) >= this->circThreshold);
 }
 
 

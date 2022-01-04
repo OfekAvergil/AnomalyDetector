@@ -34,12 +34,14 @@ void CLI::start(){
     }
 
     //direct to the chosen command
-    float* option;
-    this->dio->read(option);
-    this->options.find(*option)->second->execute();
+    float option;
+    this->dio->read(&option);
+    if (option >= 1 && option <= 6) {
+        this->options.find(option)->second->execute();
+    }
 
     //finish the program if necessary or start over
-    if (*option == 6) {
+    if (option == 6) {
         return;
     } else {
         this->start();

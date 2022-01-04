@@ -60,22 +60,22 @@ void SimpleAnomalyDetector::fillCf(const TimeSeries &ts) {
  * @return - true if the correlation is big enough, false otherwise.
  */
 bool SimpleAnomalyDetector::checkIfCorr(float corr) {
-    return (abs(corr) >= minThreshold);
+    return (abs(corr) >= linThreshold);
 }
 
 //auto-generated constructor
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
-    this->minThreshold = 0.9;
+    this->linThreshold = 0.9;
 }
 
-//constructor while given minimum threshold
+//constructor while given minimum threshold for linear correlation
 SimpleAnomalyDetector::SimpleAnomalyDetector(float thresh) {
-    this->minThreshold = thresh;
+    this->linThreshold = thresh;
 }
 
 //setter func for minThreshold
-void SimpleAnomalyDetector::ChangeMinThresh(float thresh) {
-    this->minThreshold = thresh;
+void SimpleAnomalyDetector::ChangeLinThresh(float thresh) {
+    this->linThreshold = thresh;
 }
 
 

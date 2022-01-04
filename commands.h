@@ -28,7 +28,7 @@ public:
 class AnomalyDetectorData{
 public:
     TimeSeries* learnData;
-    TimeSeries* TestDate;
+    TimeSeries* TestData;
     SimpleAnomalyDetector* detector = new HybridAnomalyDetector();
     vector<AnomalyReport> reports;
     virtual ~AnomalyDetectorData(){};
@@ -48,11 +48,11 @@ public:
     };
 };
 
-
+//command 1
 class UploadCommand : public Command{
 public:
     UploadCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
-        this->description = "1. upload a time series csv file";
+        this->description = "upload a time series csv file";
     };
     virtual void execute(){
         vector<string> train;
@@ -63,7 +63,7 @@ public:
         const char* testName = "anomalyTest.csv";
         ///// do it with loop - it will be better
 
-        /// read train.
+        /// read train
         dio->write("Please upload your local train CSV file.\n");
         line = dio->read();
         while ("done" != line){
@@ -75,7 +75,7 @@ public:
         this->data->learnData = ts1;
         dio->write("Upload complete.\n");
 
-        /// test train
+        /// read test
         dio->write("Please upload your local test CSV file.\n");
         line = dio->read();
         while ("done" != line){
@@ -83,16 +83,9 @@ public:
             line = dio->read();
         }
         TimeSeries* ts2 = new TimeSeries(trainName);
-        this->data->TestDate = ts2;
-        makeFileFromVector(train, testName);
+        this->data->TestData = ts2;
+        makeFileFromVector(test, testName);
         dio->write("Upload complete.\n");
-
-    };
-
-
-
-    virtual string getDes () {
-        return this->description;
     };
 
     void makeFileFromVector(vector<string> vec, const char* fileName){
@@ -104,6 +97,7 @@ public:
 
 };
 
+//command 2
 class SettingsCommand : public Command {
 public:
     SettingsCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
@@ -116,7 +110,7 @@ public:
     virtual void execute(){
         //print the current corr
         this->dio->write("The current correlation threshold is " );
-        this->dio->write(this->data->detector->GetMinThresh() );
+        this->dio->write(this->data->detector->GetLinThresh() );
         this->dio->write("\n" );
         //get new corr
         float corr;
@@ -126,12 +120,13 @@ public:
             this->dio->write("please choose a value between 0 and 1" );
             this->execute();
         } else {
-            this->data->detector->ChangeMinThresh(corr);
+            this->data->detector->ChangeLinThresh(corr);
             return;
         }
     };
 };
 
+//command 3
 class AnomalyDetectionCommand : public Command{
 public:
     AnomalyDetectionCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
@@ -145,11 +140,12 @@ public:
         //learn
         this->data->detector->learnNormal(*this->data->learnData);
         //detect
-        this->data->reports = this->data->detector->detect(*this->data->TestDate);
+        this->data->reports = this->data->detector->detect(*this->data->TestData);
         this->dio->write("anomaly detection complete.\n" );
     };
 };
 
+//command 4
 class ResultCommand : public Command{
 public:
     ResultCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
@@ -166,10 +162,11 @@ public:
             this->dio->write(r.description);
             this->dio->write("/n");
         }
-        this->dio->write("Done./n");
+        this->dio->write("Done. /n");
     };
 };
 
+//command 5
 class AnalyzeCommand : public Command{
 public:
     AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){};
@@ -178,10 +175,11 @@ public:
 
 };
 
+//command 6
 class ExitCommand : public Command{
 public:
     ExitCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
-        this->description = "6.exit\n";
+        this->description = "exit";
     };
     virtual void execute(){};
     virtual string getDes () {
