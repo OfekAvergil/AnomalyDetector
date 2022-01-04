@@ -28,7 +28,7 @@ void CLI::start(){
                      "Please choose an option:\n");
     for (auto const& [key,val] : options) {
         this->dio->write(key);
-        this->dio->write(". ");
+        this->dio->write(".");
         this->dio->write(val->getDes());
         this->dio->write("\n");
     }

@@ -172,7 +172,7 @@ class AnalyzeCommand : public Command{
     int FP;
 public:
     AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
-        this->description = "5.upload anomalies and analyze results.\n";
+        this->description = "upload anomalies and analyze results\n";
         this->TP = 0;
         this->FP = 0;
     }
@@ -204,13 +204,6 @@ public:
         if (flag == 0){
             this->FP++;
         }
-    }
-
-    int intervalSum(vector<pair<int,int>>* points){
-        int t = 0;
-        int size = (points->size());
-
-        return t;
     }
 
 
