@@ -55,6 +55,15 @@ map<string, vector<float>> TimeSeries::getMap() const {
     return this->data;
 }
 
+int TimeSeries::lineSize(){
+    if (this->data[0].empty()){
+        return 0;
+    }
+    else{
+        return this->data[0].size();
+    }
+}
+
 ///** initialize time vector
 //vector<float> TimeSeries::makeTimeVec(){
 //    vector<float> v;

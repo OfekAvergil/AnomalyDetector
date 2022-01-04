@@ -19,6 +19,7 @@ public:
         return a*x+b;
     }
 };
+
 class Point{
 public:
     float x,y;

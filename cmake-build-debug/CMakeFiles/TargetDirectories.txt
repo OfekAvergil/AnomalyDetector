@@ -1,3 +1,3 @@
-/home/ofek/Desktop/Mivne/AnomalyDetector/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ofek/Desktop/Mivne/AnomalyDetector/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ofek/Desktop/Mivne/AnomalyDetector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir
+/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir
