@@ -1,3 +1,0 @@
-/Users/hodamar/CLionProjects/AnomalyDetector_/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/hodamar/CLionProjects/AnomalyDetector_/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/hodamar/CLionProjects/AnomalyDetector_/cmake-build-debug/CMakeFiles/AnomalyDetector.dir
