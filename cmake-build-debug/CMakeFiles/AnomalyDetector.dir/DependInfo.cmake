@@ -1,21 +1,20 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/CLI.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/CLI.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/HybridAnomalyDetector.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/HybridAnomalyDetector.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/MainTrain.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/SimpleAnomalyDetector.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/anomaly_detection_util.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/minCircle.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/minCircle.cpp.o"
-  "/Users/hodamar/CLionProjects/Anomaly_Detector/timeseries.cpp" "/Users/hodamar/CLionProjects/Anomaly_Detector/cmake-build-debug/CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/CLI.cpp" "CMakeFiles/AnomalyDetector.dir/CLI.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/CLI.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/HybridAnomalyDetector.cpp" "CMakeFiles/AnomalyDetector.dir/HybridAnomalyDetector.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/HybridAnomalyDetector.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/MainTrain.cpp" "CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/MainTrain.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/SimpleAnomalyDetector.cpp" "CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/SimpleAnomalyDetector.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/anomaly_detection_util.cpp" "CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/anomaly_detection_util.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/minCircle.cpp" "CMakeFiles/AnomalyDetector.dir/minCircle.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/minCircle.cpp.o.d"
+  "/Users/hodamar/CLionProjects/AnomalyDetector_/timeseries.cpp" "CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o" "gcc" "CMakeFiles/AnomalyDetector.dir/timeseries.cpp.o.d"
   )
 
 # Targets to which this target links.

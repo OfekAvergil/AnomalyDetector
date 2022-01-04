@@ -82,9 +82,9 @@ public:
             test.push_back(line);
             line = dio->read();
         }
+        makeFileFromVector(test, testName);
         TimeSeries* ts2 = new TimeSeries(testName);
         this->data->TestDate = ts2;
-        makeFileFromVector(test, testName);
         dio->write("Upload complete.\n");
     };
 
@@ -207,18 +207,17 @@ public:
     }
 
     int intervalSum(vector<pair<int,int>>* points){
-        int temp = 0;
-        for (pair<int,int> p : *points) {
-            temp += p.second - p.first;
-        }
-        return temp;
+        int t = 0;
+        int size = (points->size());
+
+        return t;
     }
 
 
     virtual void execute(){
         string line;
         long s, e;
-        int N, P;
+        int N, P, sum = 0;
         vector<pair<int,int>>* points = new vector<pair<int,int>>();
         vector<AnomalyReport> reports = this->data->reports;
         vector<pair<long,long>> intervalsFromTest;
@@ -251,7 +250,12 @@ public:
 
         /// making N - time steps without exceptions, P- Amount of exceptions.
         int n = this->data->TestDate->lineSize(); // all data lines.
-        N = n - intervalSum(points);
+        for(pair<int,int> p : *points) {
+            sum += (p.second - p.first);
+        }
+
+        N = n - sum;
+
         P = points->size();
 
         //// print to user

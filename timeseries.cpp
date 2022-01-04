@@ -56,11 +56,11 @@ map<string, vector<float>> TimeSeries::getMap() const {
 }
 
 int TimeSeries::lineSize(){
-    if (this->data[0].empty()){
+    if (this->data.empty() && features.empty()){
         return 0;
     }
     else{
-        return this->data[0].size();
+        return this->data[features[0]].size();;
     }
 }
 
