@@ -117,7 +117,7 @@ public:
         float corr;
         this->dio->read(&corr);
         //while the correlation entered isn't in the right range, show alert and start over.
-        if (corr < 0 || corr > 1) {
+        if (corr <= 0 || corr > 1) {
             this->dio->write("please choose a value between 0 and 1" );
             this->execute();
         } else {

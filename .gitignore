@@ -7,3 +7,6 @@ expectedOutput.txt
 input.txt
 output.txt
 CMakeLists.txt
+CLI.h.gch
+HybridAnomalyDetector.h.gch
+SimpleAnomalyDetector.h.gch
