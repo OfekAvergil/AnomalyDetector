@@ -159,66 +159,91 @@ public:
     virtual void execute(){
         for(AnomalyReport& r : this->data->reports) {
             this->dio->write(r.timeStep);
-            this->dio->write("/t");
+            this->dio->write("\t");
             this->dio->write(r.description);
-            this->dio->write("/n");
+            this->dio->write("\n");
         }
-        this->dio->write("Done. /n");
+        this->dio->write("Done. \n");
     };
 };
 
 //command 5
-class AnalyzeCommand : public Command{
+class AnalyzeCommand : public Command {
     int TP;
     int FP;
 public:
-    AnalyzeCommand (DefaultIO* dio, AnomalyDetectorData* data) : Command(dio,data){
+    AnalyzeCommand(DefaultIO *dio, AnomalyDetectorData *data) : Command(dio, data) {
         this->description = "upload anomalies and analyze results";
         this->TP = 0;
         this->FP = 0;
     }
-    void add(vector<pair<int,int>>* v, string line, vector<pair<long,long>> testvec){
-        int xtest, ytest;
-        int flag = 0;
+
+    void add(vector<pair<int, int>> *v, string line, vector<pair<long, long>> testvec) {
+        int xtest, ytest, flag = 0;
         int sizeTest = testvec.size();
-        vector<float> temp;
+        vector<int> temp;
+
+        /// parse the 2 time-steps from the string to vector
+
         stringstream ss(line);
         while (ss.good()) {
             string substr;
             getline(ss, substr, ',');
             temp.push_back(stof(substr));
         }
-        int x  = temp[0];
+        int x = temp[0];
         int y = temp[1];
-        pair<int,int> pnt(temp[0], temp[1]);
-        v->push_back(pnt);
+
+        /// push it into interval vectors.
+        v->push_back({x, y});
 
         /// check the interval with the test intervals.
         for (int i = 0; i < sizeTest; ++i) {
             xtest = testvec[i].first;
             ytest = testvec[i].second;
-            if(x <= xtest && y <= ytest || x > xtest && y > ytest || x < xtest && y < ytest || x < xtest && y > ytest){
-                this->TP++; // there is intersection between intervals
-                flag = 1;
+            if (xtest <= x) {
+                if (ytest >= y)
+                    TP++;
+                else if ((ytest - xtest) + (y - x) >= (y - xtest))
+                    TP++;
+            } else {
+                if (y >= ytest)
+                    TP++;
+                else if ((y - x) + (ytest - xtest) >= (ytest - x))
+                    TP++;
             }
-        }
-        if (flag == 0){
-            this->FP++;
         }
     }
 
 
-    virtual void execute(){
+    string numberformat(float number) {
+        string s = to_string(number);
+        int dot = s.find('.');
+        int cutOffPosition = dot + 3;
+        while (s[cutOffPosition] == '0') {
+            cutOffPosition--;
+        }
+        /// if the number is a natural number - remove the dot
+        if (cutOffPosition == dot) {
+            cutOffPosition--;
+        }
+        return s.substr(0, cutOffPosition + 1);
+    }
+
+
+    virtual void execute() {
+        this->TP = 0;
+        this->FP = 0;
         string line;
         long s, e;
         int N, P, sum = 0;
-        vector<pair<int,int>>* points = new vector<pair<int,int>>();
+        vector<pair<int, int>> *points = new vector<pair<int, int>>();
         vector<AnomalyReport> reports = this->data->reports;
-        vector<pair<long,long>> intervalsFromTest;
+        vector<pair<long, long>> intervalsFromTest;
         int sizeOfReports = reports.size();
 
         /// making vector of intervals from test.
-        for(int i = 0 ; i < sizeOfReports ; ++i) {
+        for (int i = 0; i < sizeOfReports; ++i) {
             if (0 == i) {
                 s = reports[i].timeStep;
             }
@@ -236,7 +261,7 @@ public:
         //// reading the file into vector.
         this->dio->write("Please upload your local anomalies file.\n");
         line = this->dio->read();
-        while(line != "done"){
+        while (line != "done") {
             add(points, line, intervalsFromTest);
             line = this->dio->read();
         }
@@ -244,26 +269,26 @@ public:
 
         /// making N - time steps without exceptions, P- Amount of exceptions.
         int n = this->data->TestDate->lineSize(); // all data lines.
-        for(pair<int,int> p : *points) {
-            sum += (p.second - p.first);
+        for (pair<int, int> p: *points) {
+            sum += (p.second - p.first + 1);
         }
 
+        /// calc N, P , FP
         N = n - sum;
-
         P = points->size();
+        this->FP = intervalsFromTest.size() - this->TP;
 
         //// print to user
-        float tpRate = this->TP / P;
-        float fpRate = this-> FP / N;
+        float tpRate = (float) (this->TP) / (float) P;
+        float fpRate = (float) (this->FP) / (float) N;
+        string tpR = numberformat(tpRate);
+        string fpR = numberformat(fpRate);
         this->dio->write("True Positive Rate: ");
-        float rounded_down = floorf(tpRate * 1000) / 1000;
-        this->dio->write(rounded_down);
+        this->dio->write(tpR);
         this->dio->write("\n");
-        rounded_down = floorf(fpRate * 1000) / 1000;
         this->dio->write("False Positive Rate: ");
-        this->dio->write(rounded_down);
+        this->dio->write(fpR);
         this->dio->write("\n");
-
     }
 };
 
