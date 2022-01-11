@@ -10,7 +10,6 @@ add_executable(AnomalyDetector
         timeseries.h
         timeseries.cpp
         SimpleAnomalyDetector.cpp
-        MainTrain.cpp
         HybridAnomalyDetector.cpp
         HybridAnomalyDetector.h
         minCircle.cpp
