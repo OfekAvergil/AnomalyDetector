@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include <vector>
+#include <sys/socket.h>
 #include "HybridAnomalyDetector.h"
 
 using namespace std;
@@ -22,6 +23,42 @@ public:
 
 	// you may add additional methods here
 };
+
+class SocketIO : public DefaultIO{
+    int clientID;
+public:
+    SocketIO(int clientID) {
+        this->clientID = clientID;
+    }
+
+     string read() override {
+        char buff;
+        string str;
+        while(true){
+            recv(clientID, &buff, sizeof(char), 0);
+            str += buff;
+            if(buff == '\n'){
+                break;
+            }
+        }
+        return str;
+     }
+
+     void write(string text) override {
+         send(clientID, text.c_str(), text.length(), 0);
+     }
+     void write(float f) override {
+        string str = to_string(f);
+        write(str);
+    }
+     void read(float* f) override {
+        string input = read();
+        *f = stof(input);
+     }
+     ~SocketIO(){}
+};
+
+
 /**
  * the class hold all the data relevant to the Anomaly Detector
  */
