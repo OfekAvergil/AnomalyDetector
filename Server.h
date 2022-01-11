@@ -22,17 +22,47 @@ class ClientHandler{
     virtual void handle(int clientID)=0;
 };
 
+class Socket_IO : public DefaultIO{
+    int clientID;
+public:
+    Socket_IO(int clientID) {
+        this->clientID = clientID;
+    }
 
-// you can add helper classes here and implement on the cpp file
+    string read() override {
+        char buff;
+        string str;
+        while(true){
+            recv(clientID, &buff, sizeof(char), 0);
+            str += buff;
+            if(buff == '\n'){
+                break;
+            }
+        }
+        return str;
+    }
+
+    void write(string text) override {
+        send(clientID, text.c_str(), text.length(), 0);
+    }
+    void write(float f) override {
+        string str = to_string(f);
+        write(str);
+    }
+    void read(float* f) override {
+        string input = read();
+        *f = stof(input);
+    }
+};
 
 
 // edit your AnomalyDetectionHandler class here
 class AnomalyDetectionHandler:public ClientHandler{
 	public:
     virtual void handle(int clientID){
-    SocketIO socketio = SocketIO();
-    CLI cli = CLI(socketio);
-    cli.start();
+        Socket_IO s(clientID);
+        CLI cli = CLI(&s);
+        cli.start();
     }
 };
 
@@ -46,7 +76,8 @@ class Server {
 
 public:
 	Server(int port) throw (const char*);
-	virtual ~Server();
+	virtual ~Server(){
+    }
 	void start(ClientHandler& ch)throw(const char*);
 	void stop();
 };
