@@ -11,6 +11,8 @@
 
 #include "commands.h"
 #include "CLI.h"
+#include <thread>
+#include <netinet/in.h>
 
 using namespace std;
 
@@ -37,9 +39,10 @@ class AnomalyDetectionHandler:public ClientHandler{
 
 // implement on Server.cpp
 class Server {
-	thread* t; // the thread to run the start() method in
-
-	// you may add data members
+	std::thread* t; // the thread to run the start() method in
+    int fd;
+    sockaddr_in server;
+    sockaddr_in client;
 
 public:
 	Server(int port) throw (const char*);
