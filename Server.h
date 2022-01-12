@@ -13,6 +13,10 @@
 #include "CLI.h"
 #include <thread>
 #include <netinet/in.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -30,28 +34,29 @@ public:
     }
 
     string read() override {
-        char buff;
-        string str;
+        char buff = 0;
+        string str = "";
         while(true){
-            recv(clientID, &buff, sizeof(char), 0);
-            str += buff;
+            //recv(clientID, &buff, sizeof(char), 0);
+            ::read(clientID,&buff,sizeof(char));
             if(buff == '\n'){
                 break;
             }
+            str += buff;
         }
         return str;
     }
 
     void write(string text) override {
-        send(clientID, text.c_str(), text.length(), 0);
+        ::send(clientID, text.c_str(), text.length(), 0);
     }
     void write(float f) override {
         string str = to_string(f);
         write(str);
     }
     void read(float* f) override {
-        string input = read();
-        *f = stof(input);
+    string s = read();
+    *f = stof(s);
     }
 };
 
@@ -76,8 +81,7 @@ class Server {
 
 public:
 	Server(int port) throw (const char*);
-	virtual ~Server(){
-    }
+	virtual ~Server();
 	void start(ClientHandler& ch)throw(const char*);
 	void stop();
 };

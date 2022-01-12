@@ -15,6 +15,8 @@ add_executable(AnomalyDetector
         HybridAnomalyDetector.h
         minCircle.cpp
         minCircle.h
-        commands.h
         CLI.h
-        CLI.cpp)
+        CLI.cpp
+        server.h
+        server.cpp
+        commands.h)

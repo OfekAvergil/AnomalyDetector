@@ -1,9 +1,4 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <unistd.h>
 #include "Server.h"
 
 using namespace std;
@@ -20,7 +15,7 @@ Server::Server(int port)throw (const char*) {
     server.sin_port = htons(port);
 
     //check binding the socket with port works.
-    if(bind(fd,(struct sockaddr*)&server, sizeof(server)) < 0) {
+    if(::bind(fd,(struct sockaddr*)&server, sizeof(server)) < 0) {
         throw "bind failure";
     }
 
@@ -43,7 +38,7 @@ void Server::start(ClientHandler& ch)throw(const char*){
         ch.handle(aClient);
         close(aClient);
         close(fd);
-    })
+    });
 }
 
 void Server::stop(){
@@ -51,5 +46,5 @@ void Server::stop(){
 }
 
 Server::~Server() {
-}
+};
 

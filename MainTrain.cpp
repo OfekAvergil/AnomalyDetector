@@ -1,9 +1,4 @@
-/*
- * run2.cpp
- *
- *  Created on: 8 בדצמ× 2019
- *      Author: Eli
- */
+
 
 #include <iostream>
 #include <fstream>
@@ -92,7 +87,7 @@ void clientSide2(int port,string outputFile)throw (const char*){
 	int serverFD = initClient(port);
 	
 	ofstream out(outputFile);
-	ifstream in("input.txt");
+	ifstream in("/Users/hodamar/CLionProjects/AnomalyDetector_ex6/input.txt"); /// maybe
 	string input="";
 	while(input!="6"){
 		readMenue(out,serverFD);
@@ -155,8 +150,8 @@ size_t check(string outputFile,string expectedOutputFile){
 int main(){
 	srand (time(NULL));
 	int port=5000+ rand() % 1000;		
-	string outputFile1="output_menu";
-	string outputFile2="output";
+	string outputFile1="/Users/hodamar/CLionProjects/AnomalyDetector_ex6/output_menu";
+	string outputFile2="/Users/hodamar/CLionProjects/AnomalyDetector_ex6/output";
 	int x=rand() % 1000;
 	outputFile1+=to_string(x);
 	outputFile1+=".txt";
@@ -168,8 +163,9 @@ int main(){
 		Server server(port);
 		server.start(adh); // runs on its own thread
 		// let's run 2 clients
+        clientSide2(port,outputFile2);
 		clientSide1(port,outputFile1);
-		clientSide2(port,outputFile2);
+
 		server.stop(); // joins the server's thread
 	}catch(const char* s){
 		cout<<s<<endl;

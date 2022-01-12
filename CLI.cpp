@@ -26,8 +26,9 @@ void CLI::start(){
     //print the menu
     this->dio->write("Welcome to the Anomaly Detection Server.\n"
                      "Please choose an option:\n");
+
     for (auto &iter : options) {
-        this->dio->write(iter.first);
+        this->dio->write(to_string(iter.first));
         this->dio->write(".");
         this->dio->write(iter.second->getDes());
         this->dio->write("\n");
