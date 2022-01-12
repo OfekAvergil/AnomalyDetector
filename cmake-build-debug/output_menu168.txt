@@ -1,0 +1,8 @@
+Welcome to the Anomaly Detection Server.
+Please choose an option:
+1.000000.upload a time series csv file
+2.000000.algorithm settings
+3.000000.detect anomalies
+4.000000.display results
+5.000000.upload anomalies and analyze results
+6.000000.exit
